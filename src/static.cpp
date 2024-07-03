@@ -1,23 +1,21 @@
 #include "../include/static.hpp"
+#include <force_generator.hpp>
 
-Static::Static() {
-    p_index = -1;
-    m_x = -1.0;
-    m_y = -1.0;
-}
-
-Static::~Static() {}
-
-void Static::initialize(int index, double x, double y) {
+StaticForceGenerator::StaticForceGenerator(int index, double x, double y) {
     p_index = index;
     m_x = x;
     m_y = y;
 }
 
-void Static::apply(SystemState *system) {
-    if(p_index == -1) {
-        return;
-    }
+StaticForceGenerator::~StaticForceGenerator() {}
+
+void StaticForceGenerator::initialize(int index, double x, double y) {
+    p_index = index;
+    m_x = x;
+    m_y = y;
+}
+
+void StaticForceGenerator::apply(SystemState *system) {
     system->f_x[p_index] = 0;
     system->f_y[p_index] = 0;
     system->a_x[p_index] = 0;
@@ -26,4 +24,8 @@ void Static::apply(SystemState *system) {
     system->v_y[p_index] = 0;
     system->p_x[p_index] = m_x;
     system->p_y[p_index] = m_y;
+}
+
+double StaticForceGenerator::potentialEnergy(void *system) {
+    return 0;
 }

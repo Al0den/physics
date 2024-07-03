@@ -7,10 +7,10 @@ class OdeSolver {
         OdeSolver();
         ~OdeSolver();
         
-        void start(SystemState *initial, double dt);
-        bool step(SystemState *system);
-        void solve(SystemState *system);
-        void end(SystemState *system);
+        virtual void start(SystemState *initial, double dt) = 0;
+        virtual bool step(SystemState *system) = 0;
+        virtual void solve(SystemState *system) = 0;
+        virtual void end(SystemState *system) = 0;
     protected:
         double m_dt;
 };

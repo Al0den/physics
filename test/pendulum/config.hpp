@@ -5,10 +5,10 @@
 
 #define fps 120
 
-#define dt 1.0/100000.0 //in seconds
+#define dt 1.0/1000.0 //in seconds
 #define render_dt 1000.0/fps //in milliseconds
 
-#define time_speed 10.0
+#define time_speed 1.0
 
 #define pendulum_l 0.5
 

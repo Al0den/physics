@@ -1,15 +1,16 @@
 #pragma once
 
 #include "../include/force_generator.hpp"
+#include "../include/rigid_body_system.hpp"
 
 class GravityForceGenerator : public ForceGenerator {
     public:
         GravityForceGenerator();
         ~GravityForceGenerator();
 
-        void apply(SystemState *system);
+        virtual void apply(SystemState *system);
 
-        double potentialEnergy(SystemState *system, double height_0, bool reverse);
+        virtual double potentialEnergy(void *system);
 
         double m_g;
 };

@@ -1,16 +1,16 @@
 #pragma once
 
 #include "../include/force_generator.hpp"
+#include "../include/rigid_body_system.hpp"
 
-class Spring : public ForceGenerator {
+class SpringForceGenerator : public ForceGenerator {
     public:
-        Spring();
-        ~Spring();
+        SpringForceGenerator(int p1, int p2, double restLength, double springConstant);
+        ~SpringForceGenerator();
 
-        void apply(SystemState *system);
-        void initialize(int p1, int p2, double restLength, double springConstant);
+        virtual void apply(SystemState *system);
 
-        double potentialEnergy(SystemState *system);
+        virtual double potentialEnergy(void *system);
             
         void setP1Index(int p1);
         void setP2Index(int p2);
@@ -20,8 +20,9 @@ class Spring : public ForceGenerator {
         int p1_index;
         int p2_index;
 
-
-    private:
         double m_restLength;
+    private:
         double m_springConstant;
+
+        void initialize(int p1, int p2, double restLength, double springConstant);
 };

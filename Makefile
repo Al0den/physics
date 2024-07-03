@@ -1,6 +1,14 @@
+build:
+	g++ -c ./src/*.cpp 
+	ar rcs physics.a *.o
+	mv physics.a ./lib/libphysics.a
+	rm *.o
 simple:
-	g++ ./include/*.hpp ./src/*.cpp ./test/simple.cpp && mv a.out ./build/simple.out && rm -rf include/*.gch
+	g++ ~lphysics ./test/simple.cpp && mv a.out ./build/simple.out && rm -rf include/*.gch
 balls:
 	g++ -lSDL2 ./test/balls/*.cpp && mv a.out ./build/balls.out && rm -rf include/*.gch test/balls/*.gch
 pendulum:
-	g++ -lSDL2 -O3 ../render_engine/src/*.cpp src/*.cpp ./test/pendulum/*.cpp && mv a.out ./build/pendulum.out && rm -rf include/*.gch test/pendulum/*.gch 
+	make -B build
+	g++ -lSDL2 -lphysics -lrenderer -lSDL2_ttf -O3 ./test/pendulum/*.cpp && mv a.out ./build/pendulum.out && rm -rf include/*.gch test/pendulum/*.gch 
+
+

@@ -1,23 +1,28 @@
 #include "../include/gravity.hpp"
 
+#include <rigid_body_system.hpp>
+#include <stdio.h>
+
 GravityForceGenerator::GravityForceGenerator() {
     m_g = 9.81;
+    force_type = FORCE_GRAVITY;
 }
 
 GravityForceGenerator::~GravityForceGenerator() {}
 
 void GravityForceGenerator::apply(SystemState *system) {
-
     for(int i=0; i<system->n; i++) {
-        system->a_y[i] -= m_g;
+        system->f_y[i] -= m_g * system->m[i];
     }
+
 }
 
-double GravityForceGenerator::potentialEnergy(SystemState *system, double height_0, bool reverse) {
+double GravityForceGenerator::potentialEnergy(void *system) {
+    RigidBodySystem *real_sys = (RigidBodySystem*)system;
     double pe = 0;
-    int sign = reverse ? -1 : 1;
-    for(int i=0; i<system->n; i++) {
-        pe += system->m[i] * m_g * (system->p_y[i] - height_0);
+    int n = real_sys->getRigidBodiesCount();
+    for(int i=0; i<n; i++) {
+        pe += 0;
     }
     return pe;
 }

@@ -1,14 +1,18 @@
 #pragma once
 
 #include "../include/force_generator.hpp"
+#include "../include/rigid_body_system.hpp"
 
-class Static : public ForceGenerator {
+class StaticForceGenerator : public ForceGenerator {
     public:
-        Static();
-        ~Static();
+        StaticForceGenerator(int index, double x, double y);
+        ~StaticForceGenerator();
         
         void initialize(int index, double x, double y);
-        void apply(SystemState *system);
+        virtual void apply(SystemState *system);
+        virtual double potentialEnergy(void *system);
+
+        int force_type;
 
     private:
         int p_index;

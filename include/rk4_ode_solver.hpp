@@ -18,10 +18,10 @@ class Rk4OdeSolver : public OdeSolver {
         Rk4OdeSolver();
         ~Rk4OdeSolver();
 
-        void start(SystemState *initial, double dt);
-        bool step(SystemState *state);
-        void solve(SystemState *system);
-        void end(SystemState *system);
+        virtual void start(SystemState *initial, double dt);
+        virtual bool step(SystemState *state);
+        virtual void solve(SystemState *system);
+        virtual void end(SystemState *system);
 
         SystemState m_initialState;
         SystemState m_accumulator;

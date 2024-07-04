@@ -1,5 +1,5 @@
 build:
-	g++ -c ./src/*.cpp 
+	g++ -c ./src/*.cpp -std=c++17
 	ar rcs physics.a *.o
 	mv physics.a ./lib/libphysics.a
 	rm *.o

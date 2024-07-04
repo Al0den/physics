@@ -14,8 +14,8 @@ void RigidBodySystem::updateRenderer(rend::RenderEngine *renderer) {
 
     for(int i=0; i<n; i++) {
         RigidBody *body = m_rigidBodies[i];
-        rend::Ball b = {&(body->p_x), &(body->p_y), ball_radius, 255, 255, 255, 0};
-        renderer->addBall(b);
+        auto obj = std::make_unique<rend::BallRenderer>(&(body->p_x), &(body->p_y), ball_radius, 255, 255, 255, 0);
+        renderer->attachObject(std::move(obj)); 
     }
     
     int n_f = m_forceGenerators.size();
@@ -29,10 +29,8 @@ void RigidBodySystem::updateRenderer(rend::RenderEngine *renderer) {
             double *p2_y = &(m_rigidBodies[spring->p2_index]->p_y);
 
             double rest_length = spring->m_restLength;
-
-
-            rend::Spring s = {p1_x, p1_y, p2_x, p2_y, spring->m_restLength, line_width, 255, 255, 255, 0};
-            renderer->addSpring(s);
+            auto obj = std::make_unique<rend::SpringRenderer>(p1_x, p1_y, p2_x, p2_y, rest_length, 255, 255, 255, 0);
+            renderer->attachObject(std::move(obj));
         }
     }
 }

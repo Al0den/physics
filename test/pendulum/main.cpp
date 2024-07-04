@@ -25,7 +25,7 @@ int main() {
         }
     }
 
-    system.updateRenderer(&renderer);
+    system.updateRenderer(&renderer); 
 
     renderer.info_box->setRowCol(4, 1);
 
@@ -43,7 +43,7 @@ int main() {
     std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
 
     while(renderer.handleEvents()) {
-        if (renderer.paused) {
+        if (renderer.isPaused()) {
             continue;
         }
 

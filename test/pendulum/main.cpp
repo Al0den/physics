@@ -28,18 +28,18 @@ int main() {
     }
 
     updateRenderer(&renderer, &system);
-
-    renderer.info_box->setRowCol(4, 1);
+    rend::InfoBox* info_box = renderer.getInfoBox();
+    info_box->setRowCol(4, 1);
 
     renderer.setZoomFactor(250);
 
     double simulation_elapsed_s = 0.0;
     double next_display_s = 0;
     
-    renderer.info_box->setName(0, 0, "E.M"); 
-    renderer.info_box->setName(1, 0, "Temps simulation");
-    renderer.info_box->setName(2, 0, "Temps reel");
-    renderer.info_box->setName(3, 0, "Vitesse");
+    info_box->setName(0, 0, "E.M"); 
+    info_box->setName(1, 0, "Temps simulation");
+    info_box->setName(2, 0, "Temps reel");
+    info_box->setName(3, 0, "Vitesse");
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
@@ -58,9 +58,9 @@ int main() {
         double temps_reel_pus = std::chrono::duration_cast<std::chrono::microseconds>(current - begin).count();
         double speed_ratio = simulation_elapsed_s / temps_reel;
 
-        renderer.info_box->setValue(1, 0, std::to_string(simulation_elapsed_s).substr(0, std::to_string(simulation_elapsed_s).find(".") + 2) + "s");
-        renderer.info_box->setValue(2, 0, std::to_string(temps_reel).substr(0, std::to_string(temps_reel).find(".") + 2) + "s");
-        renderer.info_box->setValue(3, 0, std::to_string(speed_ratio).substr(0, std::to_string(speed_ratio).find(".") + 4) + "x");
+        info_box->setValue(1, 0, std::to_string(simulation_elapsed_s).substr(0, std::to_string(simulation_elapsed_s).find(".") + 2) + "s");
+        info_box->setValue(2, 0, std::to_string(temps_reel).substr(0, std::to_string(temps_reel).find(".") + 2) + "s");
+        info_box->setValue(3, 0, std::to_string(speed_ratio).substr(0, std::to_string(speed_ratio).find(".") + 4) + "x");
 
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 

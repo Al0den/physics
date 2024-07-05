@@ -1,3 +1,5 @@
+#define ALODEN_PHYSICS_ENGINE
+
 #include "../include/rigid_body_system.hpp"
 #include "../include/euler_ode_solver.hpp"
 #include "../include/force_generator.hpp"

@@ -9,6 +9,6 @@ balls:
 	g++ -lSDL2 ./test/balls/*.cpp && mv a.out ./build/balls.out && rm -rf include/*.gch test/balls/*.gch
 pendulum:
 	make -B build
-	g++ -lSDL2 -lphysics -lrenderer -lSDL2_ttf -O3 ./test/pendulum/*.cpp && mv a.out ./build/pendulum.out && rm -rf include/*.gch test/pendulum/*.gch 
+	g++ -lSDL2 -lphysics -lrenderer -lSDL2_ttf -O3 ./test/pendulum/*.cpp -std=c++17 && mv a.out ./build/pendulum.out && rm -rf include/*.gch test/pendulum/*.gch 
 
 

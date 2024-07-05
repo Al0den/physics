@@ -5,8 +5,6 @@
 #include "../include/system_state.hpp"
 #include "../include/ode_solver.hpp"
 
-#include <RenderEngine>
-
 #include <vector>
 
 class RigidBodySystem {
@@ -30,8 +28,6 @@ class RigidBodySystem {
         void process(double dt, double steps);
 
         double mechanicalEnergy();
-
-        void updateRenderer(rend::RenderEngine *renderer);
     protected:
         OdeSolver *m_solver;
 

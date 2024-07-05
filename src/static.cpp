@@ -1,5 +1,4 @@
 #include "../include/static.hpp"
-#include <force_generator.hpp>
 
 StaticForceGenerator::StaticForceGenerator(int index, double x, double y) {
     p_index = index;

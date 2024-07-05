@@ -1,5 +1,5 @@
-#include <PhysicsEngine>
 #include <RenderEngine>
+#include <PhysicsEngine>
 
 #include "config.hpp"
 
@@ -7,6 +7,8 @@
 #include <rk4_ode_solver.hpp>
 #include <string>
 #include <unistd.h>
+
+void updateRenderer(rend::RenderEngine *renderer, RigidBodySystem *system);
 
 int main() {
     RigidBodySystem system;
@@ -25,7 +27,7 @@ int main() {
         }
     }
 
-    system.updateRenderer(&renderer); 
+    updateRenderer(&renderer, &system);
 
     renderer.info_box->setRowCol(4, 1);
 
@@ -73,5 +75,33 @@ int main() {
         }
 
         current = std::chrono::steady_clock::now();
+    }
+}
+
+void updateRenderer(rend::RenderEngine *renderer, RigidBodySystem *system) {
+    int n = system->getRigidBodiesCount();
+    double ball_radius = 0.05;
+    double line_width = 0.1;
+
+    for(int i=0; i<n; i++) {
+        RigidBody *body = system->getRigidBody(i);
+        auto obj = std::make_unique<rend::BallRenderer>(&(body->p_x), &(body->p_y), ball_radius, 255, 255, 255, 0);
+        renderer->attachObject(std::move(obj)); 
+    }
+    
+    int n_f = system->getForceGeneratorsCount();
+    for(int i=0; i<n_f; i++) {
+        if(system->getForceGenerator(i)->force_type == FORCE_SPRING) {
+            SpringForceGenerator *spring = (SpringForceGenerator*)system->getForceGenerator(i);
+            double *p1_x = &(system->getRigidBody(spring->p1_index)->p_x);
+            double *p1_y = &(system->getRigidBody(spring->p1_index)->p_y);
+
+            double *p2_x = &(system->getRigidBody(spring->p2_index)->p_x);
+            double *p2_y = &(system->getRigidBody(spring->p2_index)->p_y);
+
+            double rest_length = spring->m_restLength;
+            auto obj = std::make_unique<rend::SpringRenderer>(p1_x, p1_y, p2_x, p2_y, rest_length, 255, 255, 255, 0);
+            renderer->attachObject(std::move(obj));
+        }
     }
 }

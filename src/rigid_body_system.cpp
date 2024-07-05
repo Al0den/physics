@@ -1,38 +1,9 @@
 #include "../include/rigid_body_system.hpp"
-#include "../include/spring.hpp"
 
 RigidBodySystem::RigidBodySystem() {}
 
 RigidBodySystem::~RigidBodySystem() {
     m_state.destroy();
-}
-
-void RigidBodySystem::updateRenderer(rend::RenderEngine *renderer) {
-    int n = m_rigidBodies.size();
-    double ball_radius = 0.05;
-    double line_width = 0.1;
-
-    for(int i=0; i<n; i++) {
-        RigidBody *body = m_rigidBodies[i];
-        auto obj = std::make_unique<rend::BallRenderer>(&(body->p_x), &(body->p_y), ball_radius, 255, 255, 255, 0);
-        renderer->attachObject(std::move(obj)); 
-    }
-    
-    int n_f = m_forceGenerators.size();
-    for(int i=0; i<n_f; i++) {
-        if(m_forceGenerators[i]->force_type == FORCE_SPRING) {
-            SpringForceGenerator *spring = (SpringForceGenerator*)m_forceGenerators[i];
-            double *p1_x = &(m_rigidBodies[spring->p1_index]->p_x);
-            double *p1_y = &(m_rigidBodies[spring->p1_index]->p_y);
-
-            double *p2_x = &(m_rigidBodies[spring->p2_index]->p_x);
-            double *p2_y = &(m_rigidBodies[spring->p2_index]->p_y);
-
-            double rest_length = spring->m_restLength;
-            auto obj = std::make_unique<rend::SpringRenderer>(p1_x, p1_y, p2_x, p2_y, rest_length, 255, 255, 255, 0);
-            renderer->attachObject(std::move(obj));
-        }
-    }
 }
 
 void RigidBodySystem::initialize(OdeSolver *solver) {
@@ -41,6 +12,14 @@ void RigidBodySystem::initialize(OdeSolver *solver) {
 
 void RigidBodySystem::addRigidBody(RigidBody *rigidbody) {
     m_rigidBodies.push_back(rigidbody);
+}
+
+RigidBody* RigidBodySystem::getRigidBody(int index) {
+    return m_rigidBodies[index];
+}
+
+ForceGenerator* RigidBodySystem::getForceGenerator(int index) {
+    return m_forceGenerators[index];
 }
 
 void RigidBodySystem::removeRigidBody(RigidBody *rigidbody) {
@@ -148,7 +127,6 @@ double RigidBodySystem::mechanicalEnergy() {
     double potentialEnergy = 0;
     int n = m_forceGenerators.size();
         
-    printf("dsadsdsa\n");
     for (int i = 0; i < n; i++) {
         printf("Energie potentielle de %d\n", i);
         printf("Potential energy: %f\n", m_forceGenerators[i]->potentialEnergy(&m_state));

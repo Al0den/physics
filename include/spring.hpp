@@ -6,7 +6,7 @@
 class SpringForceGenerator : public ForceGenerator {
     public:
         SpringForceGenerator(int p1, int p2, double restLength, double springConstant);
-        ~SpringForceGenerator();
+        virtual ~SpringForceGenerator();
 
         virtual void apply(SystemState *system);
 

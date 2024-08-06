@@ -5,7 +5,7 @@
 class OdeSolver {
     public:
         OdeSolver();
-        ~OdeSolver();
+        virtual ~OdeSolver();
         
         virtual void start(SystemState *initial, double dt) = 0;
         virtual bool step(SystemState *system) = 0;

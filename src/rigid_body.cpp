@@ -13,3 +13,5 @@ RigidBody::RigidBody(double x, double y, double theta, double m, double I) {
     this->m = m;
     this->I = I;
 }
+
+RigidBody::~RigidBody() {}

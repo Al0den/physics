@@ -5,7 +5,7 @@
 class EulerOdeSolver : public OdeSolver {
     public:
         EulerOdeSolver();
-        ~EulerOdeSolver();
+        virtual ~EulerOdeSolver();
         
         void start(SystemState *initial, double dt);
         bool step(SystemState *system);

@@ -13,10 +13,8 @@ enum RkStage {
 
 class Rk4OdeSolver : public OdeSolver {
     public:
-        
-    public:
         Rk4OdeSolver();
-        ~Rk4OdeSolver();
+        virtual ~Rk4OdeSolver();
 
         virtual void start(SystemState *initial, double dt);
         virtual bool step(SystemState *state);

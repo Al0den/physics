@@ -3,6 +3,7 @@
 class SystemState {
     public:
         SystemState();
+        ~SystemState();
         
         bool setObjectsCount(int count);
         void reset();

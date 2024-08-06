@@ -3,7 +3,6 @@
 class RigidBody {
     public:
         RigidBody(double x, double y, double theta, double m, double I);
-
         ~RigidBody();
 
         void localToWorld(double lx, double ly, double *wx, double *wy);

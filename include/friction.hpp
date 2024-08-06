@@ -3,14 +3,14 @@
 #include "../include/force_generator.hpp"
 #include "../include/rigid_body_system.hpp"
 
-class GravityForceGenerator : public ForceGenerator {
+class FrictionForceGenerator : public ForceGenerator {
     public:
-        GravityForceGenerator();
-        virtual ~GravityForceGenerator();
+        FrictionForceGenerator(double coeff);
+        virtual ~FrictionForceGenerator();
 
         virtual void apply(SystemState *system);
 
         virtual double potentialEnergy(void *system);
 
-        double m_g;
+        double friction_coeff;
 };

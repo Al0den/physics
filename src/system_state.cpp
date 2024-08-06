@@ -4,6 +4,7 @@
 #include <cstring>
 
 #include <stdio.h>
+#include <iostream>
 
 SystemState::SystemState() {
     n = 0;
@@ -26,6 +27,28 @@ SystemState::SystemState() {
     f_y = nullptr;
 
     m = nullptr;
+}
+
+SystemState::~SystemState() {
+    if(a_x != nullptr) {
+        delete[] a_x;
+        delete[] a_y;
+
+        delete[] v_x;
+        delete[] v_y;
+
+        delete[] p_y;
+        delete[] p_y;
+
+        delete[] theta;
+        delete[] v_theta;
+        delete[] a_theta;
+
+        delete[] m;
+
+        delete[] f_x;
+        delete[] f_y;
+    }
 }
 
 bool SystemState::setObjectsCount(int count) {
@@ -102,7 +125,6 @@ double SystemState::kineticEnergy() {
 
     return energy;
 }
-
 void SystemState::destroy() {
     if (n > 0) {
         delete[] a_x;

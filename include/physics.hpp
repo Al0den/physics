@@ -10,3 +10,6 @@
 #include "../include/static.hpp"
 #include "../include/system_state.hpp"
 #include "../include/rigid_body.hpp"
+#include "../include/friction.hpp"
+#include "../include/motion.hpp"
+#include "../include/bound.hpp"

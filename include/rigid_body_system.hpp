@@ -39,5 +39,5 @@ class RigidBodySystem {
 
         void populateSystemState(); 
 
-        SystemState m_state;
+        SystemState *m_state;
 };

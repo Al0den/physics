@@ -1,9 +1,4 @@
-#include <PhysicsEngine>
-#include <gravity.hpp>
-#include <rigid_body.hpp>
-#include <rigid_body_system.hpp>
-#include <rk4_ode_solver.hpp>
-#include <system_state.hpp>
+#include "../include/PhysicsEngine"
 
 #include <iostream>
 

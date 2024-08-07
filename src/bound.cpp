@@ -1,6 +1,5 @@
 #include "../include/bound.hpp"
 
-#include <rigid_body_system.hpp>
 #include <stdio.h>
 
 BoundForceGenerator::BoundForceGenerator(double x, double y, int index) {

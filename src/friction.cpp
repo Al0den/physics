@@ -1,6 +1,5 @@
 #include "../include/friction.hpp"
 
-#include <rigid_body_system.hpp>
 #include <stdio.h>
 
 FrictionForceGenerator::FrictionForceGenerator(double coeff) {

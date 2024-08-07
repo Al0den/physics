@@ -1,6 +1,5 @@
 #include "../include/gravity.hpp"
 
-#include <rigid_body_system.hpp>
 #include <stdio.h>
 
 GravityForceGenerator::GravityForceGenerator() {

@@ -4,7 +4,6 @@
 #include <cstring>
 
 #include <stdio.h>
-#include <iostream>
 
 SystemState::SystemState() {
     n = 0;
